@@ -2,24 +2,27 @@ package com.loyalty.app.models;
 
 public class Event {
 
-    private String counterName;
+    private String operationType;
     private int limit;
     private int condition;
     private boolean done;
 
-    public Event(String counterName, int limit, int condition) {
-        this.counterName = counterName;
+    public Event(String operationType, int limit, int condition) {
+        this.operationType = operationType;
         this.limit = limit;
         this.condition = condition;
         this.done = false;
     }
 
-    public String getCounterName() {
-        return counterName;
+    public Event() {
     }
 
-    public void setCounterName(String counterName) {
-        this.counterName = counterName;
+    public String getOperationType() {
+        return operationType;
+    }
+
+    public void setOperationType(String operationType) {
+        this.operationType = operationType;
     }
 
     public int getLimit() {

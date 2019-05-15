@@ -81,7 +81,7 @@
     <tbody>
     <c:forEach var="event" items="${events}">
         <tr>
-            <td>${event.counterName}</td>
+            <td>${event.operationType}</td>
             <td>${event.limit}</td>
             <td>${event.condition}</td>
 

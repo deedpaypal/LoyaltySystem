@@ -26,7 +26,7 @@ public class ClientUtil {
         for (int i = 0; i < counters1.size(); i++) {
             List<Event> exEv = new ArrayList<>();
             for (int z = 0; z < globalVariablesEvents.size(); z++) {
-                if (counters1.get(i).getName().contains(globalVariablesEvents.get(z).getCounterName())
+                if (counters1.get(i).getName().contains(globalVariablesEvents.get(z).getOperationType())
                         && (counters1.get(i).getAmountOfSum() >= globalVariablesEvents.get(z).getCondition())) {
                     exEv.add(globalVariablesEvents.get(z));
                 }
@@ -59,7 +59,7 @@ public class ClientUtil {
             //проверка входит ли подмножество событий правила в множество счетчиков
             for (int j = 0; j < eventsFromRules.size(); j++) {
                 int finalJ = j;
-                check = counters.stream().anyMatch(x -> x.getName().equals(eventsFromRules.get(finalJ).getCounterName())
+                check = counters.stream().anyMatch(x -> x.getName().equals(eventsFromRules.get(finalJ).getOperationType())
                         && (x.getAmountOfSum() >= eventsFromRules.get(finalJ).getCondition()));
                 if (!check) {
                     break;

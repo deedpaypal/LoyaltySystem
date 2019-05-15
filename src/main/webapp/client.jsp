@@ -63,7 +63,7 @@
                     <input name="clientID" value="${counterAndEvent.firstElement.clientID}"
                            style="display: none">
                         ${counterAndEvent.firstElement.clientID}</th>
-                <td><input name="counterName" value="${counterAndEvent.firstElement.name}"
+                <td><input name="operationType" value="${counterAndEvent.firstElement.name}"
                            style="display: none">${counterAndEvent.firstElement.name}</td>
 
                 <td><input name="counterAmountOfSum" value="${counterAndEvent.firstElement.amountOfSum}"
@@ -72,7 +72,7 @@
                 <td>
                     <select class="form-control" name="event">
                         <c:forEach var="event" items="${counterAndEvent.secondElement}">
-                            <option value="${event.counterName} - ${event.limit}">${event.counterName}
+                            <option value="${event.operationType} - ${event.limit}">${event.operationType}
                                 - ${event.limit}</option>
                         </c:forEach>
                     </select>
@@ -111,7 +111,7 @@
                 <td><input name="ruleID" value="${rule.id}"
                            style="display: none">
                     <c:forEach var="event" items="${rule.coeffsAndEvents.secondElement}">
-                        ${event.counterName} - ${event.limit}
+                        ${event.operationType} - ${event.limit}
                         <br>
                     </c:forEach>
                 </td>

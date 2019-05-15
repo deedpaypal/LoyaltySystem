@@ -56,7 +56,6 @@ public class Document {
     public void setAtmID(int atmID) {
         this.atmID = atmID;
     }
-
     public int getClientID() {
         return clientID;
     }
@@ -76,6 +75,7 @@ public class Document {
     public int getSum() {
         return sum;
     }
+
 
     public void setSum(int sum) {
         this.sum = sum;

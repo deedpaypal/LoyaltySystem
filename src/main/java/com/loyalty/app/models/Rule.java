@@ -2,9 +2,10 @@ package com.loyalty.app.models;
 
 import com.loyalty.app.util.Pair;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Rule {
+public class Rule implements Serializable {
     private int id;
     private Pair<Integer, List<Event>> coeffsAndEvents;
 
@@ -15,6 +16,9 @@ public class Rule {
     public Rule(int id, Pair<Integer, List<Event>> coeffsAndEvents) {
         this.id = id;
         this.coeffsAndEvents = coeffsAndEvents;
+    }
+
+    public Rule() {
     }
 
     public Pair<Integer, List<Event>> getCoeffsAndEvents() {
@@ -39,7 +43,7 @@ public class Rule {
 
         for (int i = 0; i < events.size(); i++) {
             Event event = events.get(i);
-            Counter counter = counters.stream().filter(x -> x.getName().equals(event.getCounterName())).findFirst().get();
+            Counter counter = counters.stream().filter(x -> x.getName().equals(event.getOperationType())).findFirst().get();
             bonuses += event.countBonuses(counter);
         }
 

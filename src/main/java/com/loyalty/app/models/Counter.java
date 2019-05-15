@@ -1,7 +1,9 @@
 package com.loyalty.app.models;
 
 
-public class Counter {
+import java.io.Serializable;
+
+public class Counter implements Serializable {
 
     private String name;
 
@@ -18,6 +20,10 @@ public class Counter {
         this.document = document;
         this.type = type;
         this.amountOfSum = amountOfSum;
+    }
+
+    public Counter() {
+
     }
 
     public String getName() {

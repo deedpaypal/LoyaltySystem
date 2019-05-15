@@ -9,7 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +36,12 @@ public class RulesController {
         List<Event> events = new ArrayList<>();
         for (int i = 0; i < types.size(); i++) {
             Event event = new Event(types.get(i), Integer.parseInt(limits.get(i)), Integer.parseInt(conditions.get(i)));
-            if(events.stream().anyMatch(x -> x.getCounterName().equals(event.getCounterName()))){
+            if (events.stream().anyMatch(x -> x.getOperationType().equals(event.getOperationType()))) {
                 continue;
             }
             if (events.stream()
-                    .noneMatch(x -> x.getCounterName()
-                            .equals(event.getCounterName()) && x.getLimit() == event.getLimit() && x.getCondition() == event.getCondition())) {
+                    .noneMatch(x -> x.getOperationType()
+                            .equals(event.getOperationType()) && x.getLimit() == event.getLimit() && x.getCondition() == event.getCondition())) {
                 events.add(event);
             }
         }
@@ -50,7 +49,7 @@ public class RulesController {
 
         if (GlobalVariables.rules.stream()
                 .noneMatch(x -> x.getCoeffsAndEvents().getFirstElement().equals(rule.getCoeffsAndEvents().getFirstElement())
-                &&  x.getCoeffsAndEvents().getSecondElement().equals(rule.getCoeffsAndEvents().getSecondElement()))) {
+                        && x.getCoeffsAndEvents().getSecondElement().equals(rule.getCoeffsAndEvents().getSecondElement()))) {
             GlobalVariables.rules.add(rule);
         }
 

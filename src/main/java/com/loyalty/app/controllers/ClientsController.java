@@ -4,7 +4,6 @@ import com.loyalty.app.models.Counter;
 import com.loyalty.app.models.Event;
 import com.loyalty.app.util.ClientUtil;
 import com.loyalty.app.util.constants.GlobalVariables;
-import com.loyalty.app.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,14 +45,14 @@ public class ClientsController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST, params = "single")
     public String clientGetBonusesSingle(@PathVariable("id") long id,
-                                   @RequestParam(required = false, name = "clientID") String clientID,
-                                   @RequestParam(required = false, name = "counterName") String counterName,
-                                   @RequestParam(required = false, name = "event") String eventName,
-                                   ModelMap model) {
-        Event event = GlobalVariables.events.stream().filter(c -> c.getCounterName().equals(counterName) &&
-                eventName.equals(c.getCounterName().concat(" - ").concat(String.valueOf(c.getLimit())))).findFirst().get();
+                                         @RequestParam(required = false, name = "clientID") String clientID,
+                                         @RequestParam(required = false, name = "counterName") String counterName,
+                                         @RequestParam(required = false, name = "event") String eventName,
+                                         ModelMap model) {
+        Event event = GlobalVariables.events.stream().filter(c -> c.getOperationType().equals(counterName) &&
+                eventName.equals(c.getOperationType().concat(" - ").concat(String.valueOf(c.getLimit())))).findFirst().get();
         Counter counter = GlobalVariables.counters.stream().filter(c -> c.getName().equals(counterName) &&
-               clientID.equals(String.valueOf(c.getClientID()))).findFirst().get();
+                clientID.equals(String.valueOf(c.getClientID()))).findFirst().get();
         int bonuses = event.countBonuses(counter);
 
         GlobalVariables.counters.stream().filter(c -> c.getName().equals(counterName) &&
@@ -68,11 +67,11 @@ public class ClientsController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST, params = "complicated")
     public String clientGetBonusesComplicated(@PathVariable("id") long id,
-                                   @RequestParam(required = false, name = "ruleID") String ruleID,
-                                   ModelMap model) {
+                                              @RequestParam(required = false, name = "ruleID") String ruleID,
+                                              ModelMap model) {
 
-        List<Counter> counters = ClientUtil.getCountersByID((int)id);
-        int bonuses = GlobalVariables.rules.stream().filter(x->x.getId() == Integer.parseInt(ruleID)).findFirst().get().countBonuses(counters);
+        List<Counter> counters = ClientUtil.getCountersByID((int) id);
+        int bonuses = GlobalVariables.rules.stream().filter(x -> x.getId() == Integer.parseInt(ruleID)).findFirst().get().countBonuses(counters);
         model.addAttribute("counterAndEvents", ClientUtil.getCounterAndEventsByClientID((int) id));
         model.addAttribute("bonuses", bonuses);
         model.addAttribute("clientID", id);

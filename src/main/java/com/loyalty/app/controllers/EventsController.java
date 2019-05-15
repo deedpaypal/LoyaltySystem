@@ -40,8 +40,8 @@ public class EventsController {
         List<Event> globalEvents = GlobalVariables.events;
         Event addedEvent = new Event(type, intLimit, intCondition);
         if (globalEvents.stream()
-                .noneMatch(x -> x.getCounterName()
-                        .equals(addedEvent.getCounterName()) && x.getLimit() == addedEvent.getLimit() && x.getCondition() == addedEvent.getCondition())) {
+                .noneMatch(x -> x.getOperationType()
+                        .equals(addedEvent.getOperationType()) && x.getLimit() == addedEvent.getLimit() && x.getCondition() == addedEvent.getCondition())) {
             GlobalVariables.events.add(addedEvent);
         }
         model.addAttribute("types", types);
